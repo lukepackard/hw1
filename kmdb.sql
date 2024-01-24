@@ -73,6 +73,39 @@
 
 -- Successful sample output is as shown:
 
+
+DROP TABLE IF EXISTS movies;
+
+CREATE TABLE movies (
+  movies_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  year INTEGER,
+  MPAA_rating TEXT,
+  studio TEXT
+);
+
+INSERT INTO movies (
+    title, 
+    year, 
+    MPAA_rating,
+    studio) 
+	VALUES (
+        "Batman Begins",
+        "2005",
+        "PG-13",
+	"Warner Bros."),
+	(
+	"The Dark Knight",
+        "2008",
+        "PG-13",
+	"Warner Bros."),
+(
+	"The Dark Knight Rises",
+        "2012",
+        "PG-13",
+	"Warner Bros."
+    );
+
 -- Movies
 -- ======
 
