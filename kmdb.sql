@@ -77,7 +77,7 @@
 DROP TABLE IF EXISTS movies;
 
 CREATE TABLE movies (
-  movies_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   year INTEGER,
   MPAA_rating TEXT,
@@ -142,6 +142,90 @@ INSERT INTO movies (
 -- Create new tables, according to your domain model
 -- TODO!
 
+
+--actors table
+DROP TABLE IF EXISTS characters;
+
+CREATE TABLE characters (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  character_name TEXT,
+  actor_name TEXT 
+);
+
+INSERT INTO characters (
+    actor_name, 
+    character_name) 
+VALUES ("Bruce Wayne", "Christian Bale"), 
+("Alfred","Michael Caine"),
+("Ra's Al Ghul", "Liam Neeson"),
+("Rachel Dawes","Katie Holmes"),
+("Commissioner Gordon", "Gary Oldman"),
+("Joker","Heath Ledger"), 
+("Harvey Dent", "Aaron Eckhart"), 
+("Bane", "Tom Hardy"), 
+("John Blake", "Joseph Gordon-Levitt"), 
+("Selina Kyle", "Anne Hathaway"); 
+
+
+--Characters table 
+DROP TABLE IF EXISTS actors;
+
+
+CREATE TABLE actors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  actor_name TEXT
+);
+
+INSERT INTO actors (
+    actor_name  
+    ) 
+VALUES ("Christian Bale"),
+("Michael Caine"), 
+("Liam Neeson"), 
+("Katie Holmes"),
+("Gary Oldman"), 
+("Heath Ledger"), 
+("Aaron Eckhart"), 
+("Maggie Gyllenhaal"), 
+("Tom Hardy"), 
+("Joseph Gordon-Levitt"), 
+("Anne Hathaway") ;
+
+
+--Contracts info 
+
+DROP TABLE IF EXISTS contracts ;
+
+CREATE TABLE contracts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER, 
+  contract_amount INTEGER, 
+  character_name TEXT,
+  actor_name TEXT 
+);
+
+INSERT INTO contracts (
+    movie_id,
+    contract_amount,
+    actor_name, 
+    character_name) 
+VALUES ("1", "10","Christian Bale", "Bruce Wayne"), 
+("1", "20","Michael Caine", "Alfred"), 
+("1", "30","Liam Neeson", "Ra's Al Ghul"), 
+("1", "40","Katie Holmes", "Rachel Dawes"), 
+("1", "50","Gary Oldman", "Commissioner Gordon"), 
+("2", "60","Christian Bale", "Bruce Wayne"),
+("2", "70", "Heath Ledger", "Joker"), 
+("2", "80","Aaron Eckhart", "Harvey Dent"),
+("2", "90","Michael Caine", "Alfred"),
+("2", "100","Katie Holmes", "Rachel Dawes"), 
+("3", "110","Christian Bale", "Bruce Wayne"), 
+("3", "120","Gary Oldman", "Commissioner Gordon"),  
+("3", "130","Tom Hardy", "Bane"), 
+("3", "140","Joseph Gordon-Levitt", "John Blake"), 
+("3", "150","Anne Hathaway", "Selina Kyle");
+
+
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
@@ -152,6 +236,9 @@ INSERT INTO movies (
 .print ""
 
 -- The SQL statement for the movies output
+SELECT * FROM movies 
+
+--I could've done this a different way, but that's just how I set up my tables. I think you were looking for a "join"
 -- TODO!
 
 -- Prints a header for the cast output
@@ -163,3 +250,4 @@ INSERT INTO movies (
 
 -- The SQL statement for the cast output
 -- TODO!
+SELECT title, actor_name, character_name FROM contracts LEFT JOIN movies ON contracts.movie_id = movies.id ORDER BY title;
